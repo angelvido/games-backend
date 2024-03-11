@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+import com.playground.games.backend.model.User;
+
 @Service
 public class UserService {
 
