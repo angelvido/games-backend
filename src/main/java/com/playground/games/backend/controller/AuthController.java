@@ -1,34 +1,70 @@
 package com.playground.games.backend.controller;
 
-import com.playground.games.backend.model.AuthRequest;
-import com.playground.games.backend.security.JwtTokenProvider;
+import com.playground.games.backend.entity.LoginAttempt;
+import com.playground.games.backend.model.dto.LoginAttemptResponse;
+import com.playground.games.backend.model.dto.LoginRequest;
+import com.playground.games.backend.model.dto.LoginResponse;
+import com.playground.games.backend.model.dto.SignupRequest;
+import com.playground.games.backend.service.LoginService;
+import com.playground.games.backend.service.UserService;
+import com.playground.games.backend.helper.JwtHelper;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtProvider;
+    private final UserService userService;
+    private final LoginService loginService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtProvider) {
+    @Autowired
+    public AuthController(AuthenticationManager authenticationManager, UserService userService, LoginService loginService) {
         this.authenticationManager = authenticationManager;
-        this.jwtProvider = jwtProvider;
+        this.userService = userService;
+        this.loginService = loginService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Void> signup(@Valid @RequestBody SignupRequest requestDto) {
+        userService.signup(requestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
-        String username = authRequest.getUsername();
-        String password = authRequest.getPassword();
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+        } catch (BadCredentialsException e) {
+            loginService.addLoginAttempt(request.username(), false);
+            throw e;
+        }
 
-        // TODO Lógica para autenticar (puede ser con authenticationManager
+        String token = JwtHelper.generateToken(request.username());
+        loginService.addLoginAttempt(request.username(), true);
+        return ResponseEntity.ok(new LoginResponse(request.username(), token));
+    }
 
-        String token = jwtProvider.generateToken(username);
-        return ResponseEntity.ok(token);
+    @GetMapping("/loginAttempts")
+    public ResponseEntity<List<LoginAttemptResponse>> loginAttempts(@RequestHeader("Authorization") String token) {
+        String username = JwtHelper.extractUsername(token.replace("Bearer ", ""));
+        List<LoginAttempt> loginAttempts = loginService.findRecentLoginAttempts(username);
+        return ResponseEntity.ok(convertToDTOs(loginAttempts));
+    }
+
+    private List<LoginAttemptResponse> convertToDTOs(List<LoginAttempt> loginAttempts) {
+        return loginAttempts.stream()
+                .map(LoginAttemptResponse::convertToDTO)
+                .collect(Collectors.toList());
     }
 }

@@ -1,0 +1,8 @@
+# db/changelog/db.changelog-master.yaml
+databaseChangeLog:
+  - include:
+      file: changelog/db.changelog-login-attempts.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelog/db.changelog-users.yaml
+      relativeToChangelogFile: true

@@ -1,4 +1,4 @@
-package com.playground.games.backend.model;
+package com.playground.games.backend.entity;
 
 import lombok.Builder;
 import lombok.Data;
