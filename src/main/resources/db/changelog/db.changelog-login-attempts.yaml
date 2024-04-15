@@ -1,11 +1,10 @@
-# db/changelog/db.changelog-login-attempts.yaml
 databaseChangeLog:
   - changeSet:
-      id: 1
-      author: you
+      id: 2
+      author: angelvido
       changes:
         - createTable:
-            tableName: login-attempt
+            tableName: login_attempt
             columns:
               - column:
                   name: id
@@ -15,8 +14,8 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: username
-                  type: VARCHAR(255)
+                  name: user_id
+                  type: UUID
                   constraints:
                     nullable: false
               - column:

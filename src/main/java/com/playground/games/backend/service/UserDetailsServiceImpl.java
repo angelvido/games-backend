@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
-    public UserDetailsServiceImpl(UserRepository repository) {
-        this.repository = repository;
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        User user = repository.findByUsername(username).orElseThrow(() ->
+        User user = userRepository.findByUsername(username).orElseThrow(() ->
                 new NotFoundException(String.format("User does not exist, username: %s", username)));
 
         return org.springframework.security.core.userdetails.User.builder()

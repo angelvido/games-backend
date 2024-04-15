@@ -1,7 +1,10 @@
 package com.playground.games.backend.controller;
 
+import com.playground.games.backend.entity.User;
+import com.playground.games.backend.helper.JwtHelper;
 import com.playground.games.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +18,15 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/{userId}")
-//    public ResponseEntity<User> updateUser(@PathVariable String userId, @RequestBody User updateUser) {
-//        // TODO Aquí debería llamar al servicio para actualizar los datos de usuario
-//    }
+    @GetMapping("/data")
+    public ResponseEntity<User> getUserByUsername(@RequestHeader("Authorization") String token) {
+        String username = JwtHelper.extractUsername(token.replace("Bearer ", ""));
+        User user = userService.findByUsername(username);
+
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

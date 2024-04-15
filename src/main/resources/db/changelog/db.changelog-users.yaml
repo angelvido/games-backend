@@ -1,11 +1,10 @@
-# db/changelog/db.changelog-users.yaml
 databaseChangeLog:
   - changeSet:
-      id: 2
-      author: you
+      id: 1
+      author: angelvido
       changes:
         - createTable:
-            tableName: user
+            tableName: users
             columns:
               - column:
                   name: user_id
@@ -34,5 +33,3 @@ databaseChangeLog:
               - column:
                   name: password
                   type: VARCHAR(255)
-                  constraints:
-                    nullable: false

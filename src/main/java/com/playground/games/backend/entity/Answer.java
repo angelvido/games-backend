@@ -1,22 +1,34 @@
 package com.playground.games.backend.entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
-@Data
-@Builder
+import java.util.UUID;
+
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Table(name = "answer", schema = "public")
 public class Answer {
 
     @Id
-    private String id;
+    @UuidGenerator
+    @Column(name = "answer_id", unique = true)
+    private UUID answer_id;
 
+    @Column(name = "letter")
+    private String letter;
+
+    @Column(name = "text", unique = true)
     private String text;
 
-    public Answer(String id, String text) {
-        this.id = id;
-        this.text = text;
-    }
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
 }

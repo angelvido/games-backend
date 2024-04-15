@@ -13,15 +13,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "login-attempt", schema = "public")
+@Table(name = "login_attempt", schema = "public")
 public class LoginAttempt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
     private Long id;
-    @Column(name = "username")
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
     @Column(name = "success")
     private Boolean success;
     @Column(name = "created_at")

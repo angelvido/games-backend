@@ -2,6 +2,7 @@ package com.playground.games.backend.service;
 
 import com.playground.games.backend.model.dto.SignupRequest;
 import com.playground.games.backend.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class UserService {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
-        this.repository = repository;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -25,7 +26,7 @@ public class UserService {
     public void signup(SignupRequest request) {
         String email = request.email();
         String username = request.username();
-        Optional<User> existingUser = repository.findByEmail(email);
+        Optional<User> existingUser = userRepository.findByEmail(email);
         if (existingUser.isPresent()) {
             throw new DuplicateKeyException(String.format("User with the email address '%s' already exists.", email));
         }
@@ -38,8 +39,14 @@ public class UserService {
                 .email(email)
                 .password(hashedPassword)
                 .build();
-        repository.save(user);
+        userRepository.save(user);
     }
 
-    // TODO Aquí se debería de implementar un método para actualizar los datos de usuario
+    @Transactional
+    public  User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found with username: " + username));
+    }
+
+    // TODO Aquí se debería de implementar un método para obtener actualizar los datos del usuario
 }

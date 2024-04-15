@@ -1,15 +1,16 @@
 package com.playground.games.backend.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "user", schema = "public")
+@Table(name = "users", schema = "public")
 public class User {
     @Id
     @UuidGenerator
@@ -32,5 +33,10 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
     @Column(name = "password")
+    @JsonIgnore
     private String password;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private List<LoginAttempt> loginAttempts;
 }
