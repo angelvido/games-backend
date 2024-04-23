@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"com.playground.games.backend.entity"})
+@EntityScan(basePackages = {"com.playground.games.backend.model.entity"})
 @EnableJpaRepositories(basePackages = {"com.playground.games.backend.repository"})
 public class PlaygroundGamesBackendApplication {
 

@@ -1,7 +1,7 @@
 package com.playground.games.backend.controller;
 
-import com.playground.games.backend.entity.LoginAttempt;
-import com.playground.games.backend.entity.User;
+import com.playground.games.backend.model.entity.LoginAttempt;
+import com.playground.games.backend.model.entity.User;
 import com.playground.games.backend.model.dto.LoginAttemptResponse;
 import com.playground.games.backend.model.dto.LoginRequest;
 import com.playground.games.backend.model.dto.LoginResponse;
@@ -9,7 +9,7 @@ import com.playground.games.backend.model.dto.SignupRequest;
 import com.playground.games.backend.repository.UserRepository;
 import com.playground.games.backend.service.LoginService;
 import com.playground.games.backend.service.UserService;
-import com.playground.games.backend.helper.JwtHelper;
+import com.playground.games.backend.security.jwt.JwtHelper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -81,6 +80,6 @@ public class AuthController {
     private List<LoginAttemptResponse> convertToDTOs(List<LoginAttempt> loginAttempts) {
         return loginAttempts.stream()
                 .map(LoginAttemptResponse::convertToDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

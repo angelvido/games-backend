@@ -1,9 +1,8 @@
 package com.playground.games.backend.service;
 
-import com.playground.games.backend.entity.LoginAttempt;
-import com.playground.games.backend.entity.User;
+import com.playground.games.backend.model.entity.LoginAttempt;
+import com.playground.games.backend.model.entity.User;
 import com.playground.games.backend.repository.LoginAttemptRepository;
-import com.playground.games.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +14,9 @@ import java.util.List;
 public class LoginService {
 
     private final LoginAttemptRepository loginAttemptRepository;
-    private final UserRepository userRepository;
 
-    public LoginService(LoginAttemptRepository loginAttemptRepository, UserRepository userRepository) {
+    public LoginService(LoginAttemptRepository loginAttemptRepository) {
         this.loginAttemptRepository = loginAttemptRepository;
-        this.userRepository = userRepository;
     }
 
     @Transactional

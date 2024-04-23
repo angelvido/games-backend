@@ -1,6 +1,8 @@
 package com.playground.games.backend.security;
 
+import com.playground.games.backend.security.jwt.JwtAuthenticationFilter;
 import com.playground.games.backend.service.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,11 +49,12 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // TODO Set permissions on every endpoint
+                // TODO - Configurar correctamente los permisos en cualquier endpoint
                 .authorizeHttpRequests(auth -> auth
-                        // Public endpoints (register, login, etc.)
+                        // Public endpoints (register, login, getStats etc.)
                         .requestMatchers(HttpMethod.POST, "/api/auth/register/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/stats/getStats/**").permitAll()
                         // Private methods (users, stats, games, etc.)
                         .anyRequest().authenticated())
                 .authenticationManager(authenticationManager)
@@ -60,7 +63,7 @@ public class SecurityConfig {
                 .build();
     }
 
-    // TODO Set Real CORS permissions
+    // TODO - Configurar correctamente el CORS con las variables de entorno
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -80,11 +83,10 @@ public class SecurityConfig {
         return authenticationManagerBuilder.build();
     }
 
-    //TODO Upgrade the Bean for the OpenAiApiController
     @Value("${openai.api.key}")
     private String openAiApiKey;
 
-    @Bean
+    @Bean("openAiRestTemplate")
     public RestTemplate openAiRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add((ClientHttpRequestInterceptor) (request, body, execution) -> {

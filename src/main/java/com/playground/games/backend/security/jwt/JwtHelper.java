@@ -1,4 +1,4 @@
-package com.playground.games.backend.helper;
+package com.playground.games.backend.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -18,6 +18,9 @@ public class JwtHelper {
 
     private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final int MINUTES = 60;
+
+    private JwtHelper() {
+    }
 
     public static String generateToken(String username) {
         var now = Instant.now();
@@ -47,7 +50,7 @@ public class JwtHelper {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (SignatureException | ExpiredJwtException e) {
-            throw  new AccessDeniedException("Access denied: " + e.getMessage());
+            throw  new AccessDeniedException("Acceso denegado: " + e.getMessage());
         }
     }
     private static boolean isTokenExpired(String token) {

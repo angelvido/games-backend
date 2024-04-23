@@ -58,4 +58,6 @@ public class RestExceptionHandler {
         return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(INTERNAL_SERVER_ERROR.value(), e.getMessage()));
     }
 
+    //TODO - Crear mas manejos de excepciones para las diferentes excepciones
+
 }

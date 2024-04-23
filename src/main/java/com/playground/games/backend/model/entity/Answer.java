@@ -1,4 +1,4 @@
-package com.playground.games.backend.entity;
+package com.playground.games.backend.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class Answer {
     @Column(name = "letter")
     private String letter;
 
-    @Column(name = "text", unique = true)
+    @Column(name = "text")
     private String text;
 
     @ManyToOne

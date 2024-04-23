@@ -1,10 +1,13 @@
-package com.playground.games.backend.security;
+package com.playground.games.backend.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.playground.games.backend.model.dto.ApiErrorResponse;
 import com.playground.games.backend.exception.AccessDeniedException;
-import com.playground.games.backend.helper.JwtHelper;
+import com.playground.games.backend.model.dto.ApiErrorResponse;
 import com.playground.games.backend.service.UserDetailsServiceImpl;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +15,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
@@ -40,15 +39,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 username = JwtHelper.extractUsername(token);
             }
             // If the accessToken is null. It will pass the request to next filter in the chain.
-            //Any login and signup request will not have jwt token in their header, therefore they will be passed to next filter chain.
+            // Any login and signup request will not have jwt token in their header, therefore they will be passed to next filter chain.
             if (token == null) {
                 filterChain.doFilter(request, response);
                 return;
             }
-            //If any accessToken is present, then it will validate the token and then authenticate the request in security context
+            // If any accessToken is present, then it will validate the token and then authenticate the request in security context
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                if (JwtHelper.validateToken(token, userDetails)) {
+                if (Boolean.TRUE.equals(JwtHelper.validateToken(token, userDetails))) {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, null);
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -67,7 +66,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             return objectMapper.writeValueAsString(response);
         } catch (Exception e) {
-            return ""; //Return empty string if serialization fails
+            return ""; // Return empty string if serialization fails
         }
     }
 }

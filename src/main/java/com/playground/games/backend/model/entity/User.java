@@ -1,4 +1,4 @@
-package com.playground.games.backend.entity;
+package com.playground.games.backend.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -39,4 +39,6 @@ public class User {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private List<LoginAttempt> loginAttempts;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Stats stats;
 }

@@ -1,6 +1,6 @@
 package com.playground.games.backend.repository;
 
-import com.playground.games.backend.entity.Question;
+import com.playground.games.backend.model.entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

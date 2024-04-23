@@ -11,6 +11,6 @@ public record ChatRequest(
 
 ) {
     public ChatRequest(String model, String prompt) {
-        this(model, new ArrayList<>(List.of(new Message("user", prompt))), 1, 0.7);
+        this(model, new ArrayList<>(List.of(new Message("user", prompt))), 1, 1);
     }
 }

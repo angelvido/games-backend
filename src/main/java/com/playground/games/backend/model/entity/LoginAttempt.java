@@ -1,4 +1,4 @@
-package com.playground.games.backend.entity;
+package com.playground.games.backend.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

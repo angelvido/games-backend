@@ -1,6 +1,6 @@
 package com.playground.games.backend.model.dto;
 
-import com.playground.games.backend.entity.LoginAttempt;
+import com.playground.games.backend.model.entity.LoginAttempt;
 
 import java.time.LocalDateTime;
 
