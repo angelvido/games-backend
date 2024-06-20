@@ -1,7 +1,7 @@
 package com.playground.games.backend.service;
 
-import com.playground.games.backend.model.dto.AddStatRequest;
-import com.playground.games.backend.model.dto.StatsDTO;
+import com.playground.games.backend.model.dto.stats.AddStatRequest;
+import com.playground.games.backend.model.dto.stats.StatsDTO;
 import com.playground.games.backend.model.entity.Stats;
 import com.playground.games.backend.model.entity.User;
 import com.playground.games.backend.repository.StatsRepository;
@@ -30,10 +30,10 @@ public class StatsService {
         Optional<Stats> optionalStats = statsRepository.findByUserUserId(user.getUserId());
         Stats stats = optionalStats.orElseThrow(() -> new RuntimeException("No se encontraron estadísticas para el usuario con ID: " + user.getUserId()));
         if (request.result()) {
-            stats.setGames_played(stats.getGames_played() + 1);
-            stats.setCorrect_answers(stats.getCorrect_answers() + 1);
+            stats.setGamesPlayed(stats.getGamesPlayed() + 1);
+            stats.setCorrectAnswers(stats.getCorrectAnswers() + 1);
         } else {
-            stats.setGames_played(stats.getGames_played() + 1);
+            stats.setGamesPlayed(stats.getGamesPlayed() + 1);
         }
         statsRepository.save(stats);
     }
@@ -45,7 +45,7 @@ public class StatsService {
                     String username = userRepository.findById(stats.getUser().getUserId())
                             .orElseThrow(() -> new RuntimeException("No se encontró el usuario con ID: " + stats.getUser().getUserId()))
                             .getUsername();
-                    return new StatsDTO(username, stats.getGames_played(), stats.getCorrect_answers());
+                    return new StatsDTO(username, stats.getGamesPlayed(), stats.getCorrectAnswers());
                 })
                 .sorted(Comparator.comparingInt(StatsDTO::games_played).reversed())
                 .toList();

@@ -24,9 +24,9 @@ public class Question {
     private UUID id;
 
     @Column(name = "question")
-    private String question;
+    private String questionText;
 
-    @Column(name = "correctAnswer")
+    @Column(name = "correct_answer")
     private String correctAnswer;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)

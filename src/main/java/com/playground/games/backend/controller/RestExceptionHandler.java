@@ -3,7 +3,7 @@ package com.playground.games.backend.controller;
 
 import com.playground.games.backend.exception.DuplicateException;
 import com.playground.games.backend.exception.NotFoundException;
-import com.playground.games.backend.model.dto.ApiErrorResponse;
+import com.playground.games.backend.model.dto.exception.ApiErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;

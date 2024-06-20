@@ -2,14 +2,14 @@ package com.playground.games.backend.controller;
 
 import com.playground.games.backend.model.entity.LoginAttempt;
 import com.playground.games.backend.model.entity.User;
-import com.playground.games.backend.model.dto.LoginAttemptResponse;
-import com.playground.games.backend.model.dto.LoginRequest;
-import com.playground.games.backend.model.dto.LoginResponse;
-import com.playground.games.backend.model.dto.SignupRequest;
+import com.playground.games.backend.model.dto.auth.LoginAttemptResponse;
+import com.playground.games.backend.model.dto.auth.LoginRequest;
+import com.playground.games.backend.model.dto.auth.LoginResponse;
+import com.playground.games.backend.model.dto.auth.SignupRequest;
 import com.playground.games.backend.repository.UserRepository;
 import com.playground.games.backend.service.LoginService;
 import com.playground.games.backend.service.UserService;
-import com.playground.games.backend.security.jwt.JwtHelper;
+import com.playground.games.backend.security.jwt.JwtProvider;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,7 +57,7 @@ public class AuthController {
             throw e;
         }
 
-        String token = JwtHelper.generateToken(request.username());
+        String token = JwtProvider.generateToken(request.username());
         User user = userRepository.findByUsername(request.username())
                         .orElseThrow(() -> new RuntimeException("User not found"));
         loginService.addLoginAttempt(user, true);
@@ -66,7 +66,7 @@ public class AuthController {
 
     @GetMapping("/loginAttempts")
     public ResponseEntity<List<LoginAttemptResponse>> loginAttempts(@RequestHeader("Authorization") String token) {
-        String username = JwtHelper.extractUsername(token.replace("Bearer ", ""));
+        String username = JwtProvider.extractUsername(token.replace("Bearer ", ""));
         Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isPresent()) {
             User user = userOptional.get();

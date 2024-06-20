@@ -6,3 +6,12 @@ databaseChangeLog:
   - include:
       file: changelog/db.changelog-users.yaml
       relativeToChangelogFile: true
+  - include:
+      file: changelog/db.changelog-stats.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelog/db.changelog-question.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelog/db.changelog-answer.yaml
+      relativeToChangelogFile: true

@@ -1,7 +1,7 @@
 package com.playground.games.backend.service;
 
-import com.playground.games.backend.model.dto.SignupRequest;
-import com.playground.games.backend.model.dto.UserDTO;
+import com.playground.games.backend.model.dto.auth.SignupRequest;
+import com.playground.games.backend.model.dto.user.UserDTO;
 import com.playground.games.backend.model.entity.Stats;
 import com.playground.games.backend.repository.StatsRepository;
 import com.playground.games.backend.repository.UserRepository;
@@ -52,8 +52,8 @@ public class UserService {
         userRepository.save(user);
 
         Stats stats = Stats.builder()
-                .games_played(0)
-                .correct_answers(0)
+                .gamesPlayed(0)
+                .correctAnswers(0)
                 .user(user)
                 .build();
         statsRepository.save(stats);

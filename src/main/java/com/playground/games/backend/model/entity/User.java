@@ -41,4 +41,5 @@ public class User {
     private List<LoginAttempt> loginAttempts;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Stats stats;
+    // TODO - Crear atributo booleano para confirmar la verificación de email
 }

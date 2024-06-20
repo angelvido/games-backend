@@ -1,4 +1,4 @@
-package com.playground.games.backend.model.dto;
+package com.playground.games.backend.model.dto.auth;
 
 import com.playground.games.backend.model.entity.LoginAttempt;
 

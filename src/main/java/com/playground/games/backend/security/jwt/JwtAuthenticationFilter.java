@@ -2,7 +2,7 @@ package com.playground.games.backend.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.playground.games.backend.exception.AccessDeniedException;
-import com.playground.games.backend.model.dto.ApiErrorResponse;
+import com.playground.games.backend.model.dto.exception.ApiErrorResponse;
 import com.playground.games.backend.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String username = null;
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 token = authHeader.substring(7);
-                username = JwtHelper.extractUsername(token);
+                username = JwtProvider.extractUsername(token);
             }
             // If the accessToken is null. It will pass the request to next filter in the chain.
             // Any login and signup request will not have jwt token in their header, therefore they will be passed to next filter chain.
@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // If any accessToken is present, then it will validate the token and then authenticate the request in security context
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                if (Boolean.TRUE.equals(JwtHelper.validateToken(token, userDetails))) {
+                if (Boolean.TRUE.equals(JwtProvider.validateToken(token, userDetails))) {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, null);
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);

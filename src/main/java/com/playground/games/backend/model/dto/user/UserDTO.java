@@ -1,4 +1,4 @@
-package com.playground.games.backend.model.dto;
+package com.playground.games.backend.model.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

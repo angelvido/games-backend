@@ -20,11 +20,11 @@ public class Stats {
     @Id
     @UuidGenerator
     @Column(name = "stats_id", unique = true)
-    private UUID stats_id;
+    private UUID id;
     @Column(name = "games_played")
-    int games_played;
+    int gamesPlayed;
     @Column(name = "correct_answers")
-    int correct_answers;
+    int correctAnswers;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @JsonIgnore

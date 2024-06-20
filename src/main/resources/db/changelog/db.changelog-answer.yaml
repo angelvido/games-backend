@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: angelvido
+      changes:
+        - createTable:
+            tableName: answer
+            columns:
+              - column:
+                  name: answer_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: letter
+                  type: VARCHAR(255)
+              - column:
+                  name: text
+                  type: VARCHAR(255)
+              - column:
+                  name: question_id
+                  type: UUID
+                  constraints:
+                    nullable: false

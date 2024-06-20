@@ -20,7 +20,7 @@ public class Answer {
     @Id
     @UuidGenerator
     @Column(name = "answer_id", unique = true)
-    private UUID answer_id;
+    private UUID answerId;
 
     @Column(name = "letter")
     private String letter;

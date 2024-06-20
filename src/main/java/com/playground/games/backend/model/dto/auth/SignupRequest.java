@@ -1,7 +1,8 @@
-package com.playground.games.backend.model.dto;
+package com.playground.games.backend.model.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record SignupRequest(
@@ -19,6 +20,7 @@ public record SignupRequest(
         String email,
 
         @NotBlank(message = "La contraseña no puede estar vacía")
-        @Size(min = 6, max = 20, message = "La contraseña debe de tener un mínimo de 6 carácteres y un máximo de 20")
+        @Size(min = 6, max = 20, message = "La contraseña debe tener un mínimo de 6 carácteres y un máximo de 20")
+        @Pattern(regexp = "^(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[A-Z]).{6,20}$", message = "La contraseña no cumple con los requisitos de seguridad")
         String password) {
 }

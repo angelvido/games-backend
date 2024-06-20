@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: angelvido
+      changes:
+        - createTable:
+            tableName: stats
+            columns:
+              - column:
+                  name: stats_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: games_played
+                  type: BIGINT
+              - column:
+                  name: correct_answers
+                  type: BIGINT

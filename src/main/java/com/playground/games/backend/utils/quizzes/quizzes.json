@@ -1,0 +1,202 @@
+[
+  {
+    "question": "¿Quién pintó la Mona Lisa?",
+    "correctAnswer": "A",
+    "answers": [
+      { "letter": "A", "text": "Leonardo da Vinci" },
+      { "letter": "B", "text": "Pablo Picasso" },
+      { "letter": "C", "text": "Vincent van Gogh" },
+      { "letter": "D", "text": "Michelangelo" }
+    ]
+  },
+  {
+    "question": "¿Qué inventor es conocido por patentar la primera máquina de vapor?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "Thomas Edison" },
+      { "letter": "B", "text": "James Watt" },
+      { "letter": "C", "text": "Alexander Graham Bell" },
+      { "letter": "D", "text": "Nikola Tesla" }
+    ]
+  },
+  {
+    "question": "¿Cuál es el año de la independencia de Estados Unidos?",
+    "correctAnswer": "A",
+    "answers": [
+      { "letter": "A", "text": "1776" },
+      { "letter": "B", "text": "1789" },
+      { "letter": "C", "text": "1804" },
+      { "letter": "D", "text": "1865" }
+    ]
+  },
+  {
+    "question": "¿Dónde se encuentra la Gran Barrera de Coral?",
+    "correctAnswer": "C",
+    "answers": [
+      { "letter": "A", "text": "Hawai" },
+      { "letter": "B", "text": "Mediterráneo" },
+      { "letter": "C", "text": "Australia" },
+      { "letter": "D", "text": "Filipinas" }
+    ]
+  },
+  {
+    "question": "¿Cuál es la fórmula química del agua?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "CO2" },
+      { "letter": "B", "text": "H2O" },
+      { "letter": "C", "text": "NaCl" },
+      { "letter": "D", "text": "C6H12O6" }
+    ]
+  },
+  {
+    "question": "¿En qué país se originó el deporte del judo?",
+    "correctAnswer": "A",
+    "answers": [
+      { "letter": "A", "text": "Japón" },
+      { "letter": "B", "text": "China" },
+      { "letter": "C", "text": "Rusia" },
+      { "letter": "D", "text": "Francia" }
+    ]
+  },
+  {
+    "question": "¿Quién escribió 'Don Quijote de la Mancha'?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "Gabriel García Márquez" },
+      { "letter": "B", "text": "Miguel de Cervantes" },
+      { "letter": "C", "text": "William Shakespeare" },
+      { "letter": "D", "text": "Friedrich Nietzsche" }
+    ]
+  },
+  {
+    "question": "¿Qué metal es el mejor conductor de electricidad?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "Hierro" },
+      { "letter": "B", "text": "Cobre" },
+      { "letter": "C", "text": "Aluminio" },
+      { "letter": "D", "text": "Plomo" }
+    ]
+  },
+  {
+    "question": "¿En qué año fue la Revolución Rusa?",
+    "correctAnswer": "A",
+    "answers": [
+      { "letter": "A", "text": "1917" },
+      { "letter": "B", "text": "1905" },
+      { "letter": "C", "text": "1923" },
+      { "letter": "D", "text": "1932" }
+    ]
+  },
+  {
+    "question": "¿Cuál es el río más largo del mundo?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "Nilo" },
+      { "letter": "B", "text": "Amazonas" },
+      { "letter": "C", "text": "Río Yangtsé" },
+      { "letter": "D", "text": "Misisipi" }
+    ]
+  },
+  {
+    "question": "¿Quién es conocido como el 'Padre de la Computación'?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "Bill Gates" },
+      { "letter": "B", "text": "Alan Turing" },
+      { "letter": "C", "text": "Steve Jobs" },
+      { "letter": "D", "text": "Tim Berners-Lee" }
+    ]
+  },
+  {
+    "question": "¿En qué país nació el famoso pintor Pablo Picasso?",
+    "correctAnswer": "C",
+    "answers": [
+      { "letter": "A", "text": "Italia" },
+      { "letter": "B", "text": "Francia" },
+      { "letter": "C", "text": "España" },
+      { "letter": "D", "text": "Grecia" }
+    ]
+  },
+  {
+    "question": "¿Qué famoso físico formuló la teoría de la relatividad?",
+    "correctAnswer": "A",
+    "answers": [
+      { "letter": "A", "text": "Albert Einstein" },
+      { "letter": "B", "text": "Isaac Newton" },
+      { "letter": "C", "text": "Stephen Hawking" },
+      { "letter": "D", "text": "Galileo Galilei" }
+    ]
+  },
+  {
+    "question": "¿En qué deporte se juega la Copa del Mundo?",
+    "correctAnswer": "C",
+    "answers": [
+      { "letter": "A", "text": "Baloncesto" },
+      { "letter": "B", "text": "Golf" },
+      { "letter": "C", "text": "Fútbol" },
+      { "letter": "D", "text": "Tenis" }
+    ]
+  },
+  {
+    "question": "¿Qué pintor postimpresionista pintó 'La noche estrellada'?",
+    "correctAnswer": "D",
+    "answers": [
+      { "letter": "A", "text": "Pablo Picasso" },
+      { "letter": "B", "text": "Leonardo da Vinci" },
+      { "letter": "C", "text": "Claude Monet" },
+      { "letter": "D", "text": "Vincent van Gogh" }
+    ]
+  },
+  {
+    "question": "¿En qué año se lanzó el primer iPhone?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "2005" },
+      { "letter": "B", "text": "2007" },
+      { "letter": "C", "text": "2009" },
+      { "letter": "D", "text": "2010" }
+    ]
+  },
+  {
+    "question": "¿Cuál es la capital de España?",
+    "correctAnswer": "A",
+    "answers": [
+      { "letter": "A", "text": "Madrid" },
+      { "letter": "B", "text": "Barcelona" },
+      { "letter": "C", "text": "Valencia" },
+      { "letter": "D", "text": "Sevilla" }
+    ]
+  },
+  {
+  "question": "¿Quién fue el primer hombre en la Luna?",
+  "correctAnswer": "B",
+  "answers": [
+    { "letter": "A", "text": "Yuri Gagarin" },
+    { "letter": "B", "text": "Neil Armstrong" },
+    { "letter": "C", "text": "Buzz Aldrin" },
+    { "letter": "D", "text": "John Glenn" }
+  ]
+},
+  {
+    "question": "¿Qué deporte se juega en Wimbledon?",
+    "correctAnswer": "B",
+    "answers": [
+      { "letter": "A", "text": "Golf" },
+      { "letter": "B", "text": "Tenis" },
+      { "letter": "C", "text": "Fútbol" },
+      { "letter": "D", "text": "Rugby" }
+    ]
+  },
+  {
+    "question": "¿Quién escribió 'El principito'?",
+    "correctAnswer": "D",
+    "answers": [
+      { "letter": "A", "text": "F. Scott Fitzgerald" },
+      { "letter": "B", "text": "Gabriel García Márquez" },
+      { "letter": "C", "text": "Leo Tolstoy" },
+      { "letter": "D", "text": "Antoine de Saint-Exupéry" }
+    ]
+  }
+]

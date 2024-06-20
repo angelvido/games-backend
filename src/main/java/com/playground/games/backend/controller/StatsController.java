@@ -1,9 +1,9 @@
 package com.playground.games.backend.controller;
 
-import com.playground.games.backend.model.dto.AddStatRequest;
-import com.playground.games.backend.model.dto.StatsDTO;
+import com.playground.games.backend.model.dto.stats.AddStatRequest;
+import com.playground.games.backend.model.dto.stats.StatsDTO;
 import com.playground.games.backend.model.entity.User;
-import com.playground.games.backend.security.jwt.JwtHelper;
+import com.playground.games.backend.security.jwt.JwtProvider;
 import com.playground.games.backend.service.StatsService;
 import com.playground.games.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class StatsController {
 
     @PostMapping("/addStat")
     public ResponseEntity<Void> addStat(@RequestHeader("Authorization") String token, @RequestBody AddStatRequest request) {
-        String username = JwtHelper.extractUsername(token.replace("Bearer ", ""));
+        String username = JwtProvider.extractUsername(token.replace("Bearer ", ""));
         User user = userService.findByUsername(username);
 
         if (user != null) {

@@ -1,8 +1,8 @@
 package com.playground.games.backend.controller;
 
-import com.playground.games.backend.model.dto.UserDTO;
+import com.playground.games.backend.model.dto.user.UserDTO;
 import com.playground.games.backend.model.entity.User;
-import com.playground.games.backend.security.jwt.JwtHelper;
+import com.playground.games.backend.security.jwt.JwtProvider;
 import com.playground.games.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/data")
     public ResponseEntity<User> getUserByUsername(@RequestHeader("Authorization") String token) {
-        String username = JwtHelper.extractUsername(token.replace("Bearer ", ""));
+        String username = JwtProvider.extractUsername(token.replace("Bearer ", ""));
         User user = userService.findByUsername(username);
 
         if (user != null) {
@@ -33,7 +33,7 @@ public class UserController {
 
     @PutMapping("/update")
     public ResponseEntity<Void> updateUserMetadata(@RequestHeader("Authorization") String token, @RequestBody UserDTO userDTO) {
-        String username = JwtHelper.extractUsername(token.replace("Bearer ",""));
+        String username = JwtProvider.extractUsername(token.replace("Bearer ",""));
         User user = userService.findByUsername(username);
 
         if (user != null) {

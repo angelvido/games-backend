@@ -2,11 +2,12 @@ package com.playground.games.backend.security;
 
 import com.playground.games.backend.security.jwt.JwtAuthenticationFilter;
 import com.playground.games.backend.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -49,7 +50,6 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // TODO - Configurar correctamente los permisos en cualquier endpoint
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints (register, login, getStats etc.)
                         .requestMatchers(HttpMethod.POST, "/api/auth/register/**").permitAll()
@@ -69,7 +69,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
         configuration.addAllowedOriginPattern("*");
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "PUT", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -90,9 +90,13 @@ public class SecurityConfig {
     public RestTemplate openAiRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add((ClientHttpRequestInterceptor) (request, body, execution) -> {
-            request.getHeaders().add("Authorization", "Bearer " + openAiApiKey);
+            HttpHeaders headers = request.getHeaders();
+            headers.add("Authorization", "Bearer " + openAiApiKey);
+            headers.setContentType(MediaType.APPLICATION_JSON);
             return execution.execute(request, body);
         });
         return restTemplate;
     }
+
+    // TODO - Creacion de posibles Bean para verificaciones de seguridad como (Validacion de cuentas mediante email o contraseñas con restricciones de caracteres especiales)
 }

@@ -14,12 +14,12 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-public class JwtHelper {
+public class JwtProvider {
 
     private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final int MINUTES = 60;
 
-    private JwtHelper() {
+    private JwtProvider() {
     }
 
     public static String generateToken(String username) {
@@ -53,8 +53,11 @@ public class JwtHelper {
             throw  new AccessDeniedException("Acceso denegado: " + e.getMessage());
         }
     }
+
     private static boolean isTokenExpired(String token) {
         Claims claims = getTokenBody(token);
         return claims.getExpiration().before(new Date());
     }
+
+    // TODO - Crear métodos para los tokens de verificación de registro de usuario
 }
